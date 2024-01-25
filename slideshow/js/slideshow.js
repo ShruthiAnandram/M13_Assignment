@@ -34,11 +34,6 @@ const createSlideshow = function () {
 
     // PUBLIC METHODS THAT HAVE ACCESS TO PRIVATE VARIABLES AND FUNCTIONS
     return {
-        getSpeed : function () {
-            speed = 
-        },
-
-
 
         loadImages: function (slides) {
             for (let i = 0; i < slides.length; i++) {
@@ -54,7 +49,7 @@ const createSlideshow = function () {
                 nodes.image = arguments[0]
                 nodes.caption = arguments[1]
             }
-            timer = setInterval(displayNextImage, 2000)
+            timer = setInterval(displayNextImage, speed)
             return this
         },
         createToggleHandler: function () {
@@ -71,6 +66,17 @@ const createSlideshow = function () {
                 setPlayText(this)
                 // TOGGLE PLAY 'FLAG'
                 play = !play
+            }
+        },
+
+        // Added Speed handler method 
+        createSpeedHandler : function () {
+            let me = this
+
+            return function () {
+                stopSlideShow();
+                speed = prompt("Enter the speed")
+                me.startSlideShow();
             }
         }
     }
@@ -93,5 +99,5 @@ window.addEventListener('load', () => {
     // PAUSE THE SLIDESHOW
     $('play_pause').onclick = slideshow.createToggleHandler()
 
-    $('speed').onclick = slideshow.setSpeed()
+    $('speed').onclick = slideshow.createSpeedHandler()
 })
