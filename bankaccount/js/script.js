@@ -7,37 +7,33 @@ const createBank = function () {
     let depositAmount
     let withdrawAmount
 
-    const displayNameAndDetails =  function () {
-        $('output').innerHTML = name +" "+ balance
-    };
-    return displayNameAndDetails;
-
-
-   const getName = function () {
-            let me = this;
-            name = prompt("Enter the name of the customer")
-            console.log("the name is " + name)
-    };
-    return getName;
-
-    const getDepositAmount = function () {
-            let me = this;
-            depositAmount = prompt("Enter the amount to deposit");
-            balance += depositAmount
-            console.log("the balance is " + balance)
-    };
-    return getDepositAmount;
-
-    const getWithdrawAmount = function () {
-            let me = this;
-            withdrawAmount = prompt("Enter the amount to withdaw")
-            if (balance <= 0) {
-                alert("You have zero balance. Please deposit some amount! ")
-            }
-            balance -= withdrawAmount
-            console.log("the balance is " + balance)
-    };
-    return getWithdrawAmount;
+    return {
+        // PUBLIC FUNCTIONS
+        getName : function() {
+                let me = this;
+                name = prompt("Enter the name of the customer")
+        },
+    
+        getDepositAmount : function() {
+                let me = this;
+                depositAmount = Number(prompt("Enter the amount to deposit"));
+                balance += depositAmount
+                $("output").innerHTML = "The customer is : " + name + "<br>" + " The balance is : " + balance
+        },
+        
+        getWithdrawAmount : function() {
+                let me = this;
+                withdrawAmount = Number(prompt("Enter the amount to withdaw"))
+                if (balance <= 0) {
+                    alert("You have zero balance. Please deposit some amount! ")
+                }
+                else {
+                    balance -= withdrawAmount
+                }
+                $("output").innerHTML = "The customer is : " + name + "<br>" + "The balance is : " + balance
+                
+        }
+    }
 
 }
 
